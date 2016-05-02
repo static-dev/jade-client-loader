@@ -30,14 +30,19 @@ module.exports = {
       { test: /\.jade$/, loader: 'jade-client' }
     ]
   },
-  jade: {
-    pretty: false,
-    locals: { foo: 'bar' }
-  }
+  jade: { pretty: false }
 }
 ```
 
-The loader simply returns a string containing the compiled html. Now you also probably would want to extract out the resulting code and write it to an html file, rather than letting it chill in your javascript output, but that's not part of what a loader can do, so use some plugins or maybe roots-mini for this instead.
+To use a template, you can require it in your primary js file from webpack, like this:
+
+```js
+var tpl = require('./test_template.jade')
+
+console.log(tpl({ foo: 'bar' }))
+```
+
+Once you execute the required function, it will return your html, and you can use this as you wish!
 
 ### License & Contributing
 
