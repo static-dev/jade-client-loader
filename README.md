@@ -1,0 +1,45 @@
+# Jade Client Loader
+
+[![npm](http://img.shields.io/npm/v/jade-client-loader.svg?style=flat)](https://badge.fury.io/js/jade-client-loader) [![tests](http://img.shields.io/travis/carrot/jade-client-loader/master.svg?style=flat)](https://travis-ci.org/carrot/jade-client-loader) [![dependencies](http://img.shields.io/gemnasium/carrot/jade-client-loader.svg?style=flat)](https://gemnasium.com/carrot/jade-client-loader)
+
+Webpack loader that compiles jade to a javascript template
+
+> **Note:** This project is in early development, and versioning is a little different. [Read this](http://markup.im/#q4_cRZ1Q) for more details.
+
+### Why should you care?
+
+This loader is a very simple version of the standard webpack jade loader. It does not hack apart the compiler in order to add the ability to use webpack's `require` internally. It is used with [roots-mini](https://github.com/carrot/roots-mini), where we track dependencies in a different way.
+
+At the moment, it loads up a file according to the test, compiles it as a client template, tracks jade dependencies, and exposes it as an export.
+
+### Installation
+
+`npm i jade-client-loader -S`
+
+### Usage
+
+This loader does not accept any options via `query`, because all `query` options are stringified, which means that functions cannot be passed. However, it's quite a common use-case to pass a function to jade as a local, and unfortunately functions cannot be stringified. Also querystrings are ugly.
+
+So instead, this loader pulls settings directly from the webpack options, from the `jade` key. If you were to set up a simple webpack project using this loader, it would look something like this:
+
+```js
+// webpack.config.js
+module.exports = {
+  module: {
+    loaders: [
+      { test: /\.jade$/, loader: 'jade-client' }
+    ]
+  },
+  jade: {
+    pretty: false,
+    locals: { foo: 'bar' }
+  }
+}
+```
+
+The loader simply returns a string containing the compiled html. Now you also probably would want to extract out the resulting code and write it to an html file, rather than letting it chill in your javascript output, but that's not part of what a loader can do, so use some plugins or maybe roots-mini for this instead.
+
+### License & Contributing
+
+- Details on the license [can be found here](LICENSE.md)
+- Details on running tests and contributing [can be found here](contributing.md)
