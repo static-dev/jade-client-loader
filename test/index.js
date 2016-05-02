@@ -6,7 +6,7 @@ import webpack from 'webpack'
 
 const fixturesPath = path.join(__dirname, 'fixtures')
 
-test.cb('compiles a jade template', (t) => {
+test.only.cb('compiles a jade template', (t) => {
   const p = path.join(fixturesPath, 'default')
   webpack({
     context: p,
@@ -17,8 +17,12 @@ test.cb('compiles a jade template', (t) => {
   }, (err, stats) => {
     if (err) { t.end(err) }
     const src = fs.readFileSync(path.join(p, 'bundle.js'), 'utf8')
-    t.ok(src.match('<p>hello world</p>'))
-    // rimraf(path.join(p, 'bundle.js'), t.end)
+    t.plan(1)
+    var _log = console.log
+    console.log = (message) => { t.is(message.trim(), '<p>bar</p>') }
+    var out = eval(src)
+    console.log = _log
+    rimraf(path.join(p, 'bundle.js'), t.end)
   })
 })
 
