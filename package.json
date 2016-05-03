@@ -1,7 +1,7 @@
 {
   "name": "jade-client-loader",
   "version": "0.0.1",
-  "description": "a simpler jade client-side loader for webpack",
+  "description": "a simple jade client-side loader for webpack",
   "main": "lib",
   "scripts": {
     "test": "ava"
