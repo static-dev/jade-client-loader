@@ -6,7 +6,7 @@ import webpack from 'webpack'
 
 const fixturesPath = path.join(__dirname, 'fixtures')
 
-test.only.cb('compiles a jade template', (t) => {
+test.cb('compiles a jade template', (t) => {
   const p = path.join(fixturesPath, 'default')
   webpack({
     context: p,
@@ -20,13 +20,13 @@ test.only.cb('compiles a jade template', (t) => {
     t.plan(1)
     var _log = console.log
     console.log = (message) => { t.is(message.trim(), '<p>bar</p>') }
-    var out = eval(src)
+    eval(src) // eslint-disable-line
     console.log = _log
     rimraf(path.join(p, 'bundle.js'), t.end)
   })
 })
 
-test.cb('compiles a jade template + tracks dependencies', (t) => {
+test.cb('adds jade runtime, tracks dependencies', (t) => {
   const p = path.join(fixturesPath, 'dependencies')
   webpack({
     context: p,
@@ -36,27 +36,10 @@ test.cb('compiles a jade template + tracks dependencies', (t) => {
     module: { loaders: [{ test: /\.jade$/, loader: 'lib' }] }
   }, (err, stats) => {
     if (err) { t.end(err) }
-    const src = fs.readFileSync(path.join(p, 'bundle.js'), 'utf8')
-    t.regex(src, /<p>from partial<\/p>/)
-    const dep = stats.compilation.fileDependencies[0]
-    t.regex(dep, /_partial.jade/)
-    rimraf(path.join(p, 'bundle.js'), t.end)
-  })
-})
-
-test.cb('accepts locals through options object', (t) => {
-  const p = path.join(fixturesPath, 'locals')
-  webpack({
-    context: p,
-    entry: path.join(p, 'app.js'),
-    output: { path: p },
-    resolveLoader: { root: path.resolve('..') },
-    module: { loaders: [{ test: /\.jade$/, loader: 'lib' }] },
-    jade: { locals: { foo: () => 'bar' } }
-  }, (err, stats) => {
-    if (err) { t.end(err) }
-    const src = fs.readFileSync(path.join(p, 'bundle.js'), 'utf8')
-    t.ok(src.match('bar'))
+    const dep1 = stats.compilation.fileDependencies[0]
+    t.regex(dep1, /runtime.js/)
+    const dep2 = stats.compilation.fileDependencies[1]
+    t.regex(dep2, /_partial.jade/)
     rimraf(path.join(p, 'bundle.js'), t.end)
   })
 })
