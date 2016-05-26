@@ -1,8 +1,8 @@
-import test from 'ava'
-import path from 'path'
-import fs from 'fs'
-import rimraf from 'rimraf'
-import webpack from 'webpack'
+const test = require('ava')
+const path = require('path')
+const fs = require('fs')
+const rimraf = require('rimraf')
+const webpack = require('webpack')
 
 const fixturesPath = path.join(__dirname, 'fixtures')
 
@@ -56,7 +56,7 @@ test.cb('throws if options are invalid', (t) => {
   }, (_, stats) => {
     if (stats.compilation.errors) {
       const err = stats.compilation.errors[0].toString()
-      t.ok(err.match('"locals" must be an object'))
+      t.truthy(err.match('"locals" must be an object'))
       t.end()
     } else {
       t.end('no error present with invalid options')
