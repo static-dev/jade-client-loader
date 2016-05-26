@@ -1,6 +1,7 @@
 # Jade Client Loader
 
-[![npm](http://img.shields.io/npm/v/jade-client-loader.svg?style=flat)](https://badge.fury.io/js/jade-client-loader) [![tests](http://img.shields.io/travis/carrot/jade-client-loader/master.svg?style=flat)](https://travis-ci.org/carrot/jade-client-loader) [![dependencies](http://img.shields.io/gemnasium/carrot/jade-client-loader.svg?style=flat)](https://gemnasium.com/carrot/jade-client-loader)
+[![npm](http://img.shields.io/npm/v/jade-client-loader.svg?style=flat)](https://badge.fury.io/js/jade-client-loader) [![tests](http://img.shields.io/travis/static-dev/jade-client-loader/master.svg?style=flat)](https://travis-ci.org/static-dev/jade-client-loader) [![dependencies](http://img.shields.io/david/static-dev/jade-client-loader.svg?style=flat)](https://david-dm.org/static-dev/jade-client-loader)
+[![coverage](http://img.shields.io/coveralls/static-dev/jade-client-loader.svg?style=flat)](https://coveralls.io/github/static-dev/jade-client-loader)
 
 Webpack loader that compiles jade to a javascript template
 
@@ -8,7 +9,7 @@ Webpack loader that compiles jade to a javascript template
 
 ### Why should you care?
 
-This loader is a very simple version of the standard webpack jade loader. It does not hack apart the compiler in order to add the ability to use webpack's `require` internally. It is used with [roots-mini](https://github.com/carrot/roots-mini), where we track dependencies in a different way.
+This loader is a very simple version of the standard webpack jade loader. It does not hack apart the compiler in order to add the ability to use webpack's `require` internally.
 
 At the moment, it loads up a file according to the test, compiles it as a client template, tracks jade dependencies, and exposes it as an export.
 
