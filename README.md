@@ -1,5 +1,7 @@
 # Jade Client Loader
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/static-dev/jade-client-loader.svg)](https://greenkeeper.io/)
+
 [![npm](http://img.shields.io/npm/v/jade-client-loader.svg?style=flat)](https://badge.fury.io/js/jade-client-loader) [![tests](http://img.shields.io/travis/static-dev/jade-client-loader/master.svg?style=flat)](https://travis-ci.org/static-dev/jade-client-loader) [![dependencies](http://img.shields.io/david/static-dev/jade-client-loader.svg?style=flat)](https://david-dm.org/static-dev/jade-client-loader)
 [![coverage](http://img.shields.io/coveralls/static-dev/jade-client-loader.svg?style=flat)](https://coveralls.io/github/static-dev/jade-client-loader)
 
